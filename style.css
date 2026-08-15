@@ -1,10 +1,3 @@
-/*
-   Pranjal's F1 portfolio
-   Direction: Scuderia livery — carbon black, Ferrari red, a flash of Giallo Modena.
-   Typeface is Titillium Web on purpose: it's F1's actual broadcast/branding font,
-   not a generic condensed sans standing in for "racing."
-   Signature moment: a real 5-light F1 start sequence gates entry to the page.
-*/
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&family=Space+Mono:wght@400;700&display=swap');
 
@@ -20,7 +13,7 @@
     --carbon-black-2: #121212;
     --ferrari-red: #E10600;
     --ferrari-red-deep: #9E0500;
-    --giallo: #FFD400;          /* Scuderia shield yellow — used sparingly, as a spark */
+    --giallo: #FFD400;          
     --off-white: #F3F0E8;
     --muted: rgba(243, 240, 232, 0.62);
     --muted-2: rgba(243, 240, 232, 0.38);
@@ -46,8 +39,6 @@ body {
     background: var(--carbon-black);
     color: var(--off-white);
     font-family: var(--font-body);
-
-    /* faint carbon-fibre weave, not decoration for its own sake — grounds the black in a material */
     background-image:
         repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px),
         repeating-linear-gradient(-45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px);
@@ -58,7 +49,7 @@ body {
     color: var(--off-white);
 }
 
-/* thin red scrollbar — small detail, feels intentional */
+
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--carbon-black); }
 ::-webkit-scrollbar-thumb {
@@ -70,23 +61,6 @@ html { scrollbar-color: var(--ferrari-red-deep) var(--carbon-black); scrollbar-w
 
 a { font-family: inherit; }
 
-/* =========================================================
-   SIGNATURE — start-lights intro
-   Markup needed once, right after <body>:
-
-   <div class="start-lights" aria-hidden="true">
-     <span class="light"></span>
-     <span class="light"></span>
-     <span class="light"></span>
-     <span class="light"></span>
-     <span class="light"></span>
-   </div>
-
-   Five lights fire in sequence like an F1 grid start, hold red,
-   then go out together and the page is "released." Runs once on load,
-   then removes itself from interaction (pointer-events: none) and
-   is skipped entirely for reduced-motion users.
-   ========================================================= */
 
 .start-lights {
     position: fixed;
@@ -151,10 +125,6 @@ a { font-family: inherit; }
 @media (prefers-reduced-motion: reduce) {
     .start-lights { display: none; }
 }
-
-/* =========================================================
-   NAV
-   ========================================================= */
 
 nav {
     position: fixed;
@@ -272,11 +242,6 @@ button:focus-visible {
     outline-offset: 3px;
 }
 
-/* =========================================================
-   HERO
-   Add inside #home, as the first child, a background logo layer:
-   <img class="bg-logo" src="logo.png" alt="">
-   ========================================================= */
 
 #home {
     position: relative;
@@ -296,7 +261,6 @@ button:focus-visible {
         linear-gradient(120deg, #150000 0%, #0a0a0a 55%, #050505 100%);
 }
 
-/* the actual logo, huge and faint, off to the side — the "background logo" ask */
 #home .bg-logo {
     position: absolute;
     right: -6%;
@@ -313,7 +277,7 @@ button:focus-visible {
     user-select: none;
 }
 
-/* Ferrari livery stripe, cut diagonally across the corner */
+
 #home::before {
     content: "";
     position: absolute;
@@ -336,7 +300,6 @@ button:focus-visible {
     pointer-events: none;
 }
 
-/* thin red light-streak across the background */
 #home::after {
     content: "";
     position: absolute;
@@ -377,7 +340,6 @@ button:focus-visible {
     box-shadow: 0 0 10px 2px rgba(225, 6, 0, 0.7);
 }
 
-/* fallback: if the markup still uses a plain <p> as the eyebrow line */
 #home p:first-child {
     position: relative;
     z-index: 1;
@@ -438,7 +400,6 @@ button:focus-visible {
     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* checkered-flag sweep on hover — the button is styled as a finish line you cross */
 #home button::before {
     content: "";
     position: absolute;
@@ -476,7 +437,6 @@ button:focus-visible {
     transform: translateX(3px) scale(0.98);
 }
 
-/* load-in — now sequenced to start right as the lights go out */
 #home .eyebrow,
 #home p:first-child {
     animation: fadeUp 0.7s var(--ease-out) 2.6s both;
@@ -528,10 +488,6 @@ button:focus-visible {
     #home .bg-logo { opacity: 0.05 !important; }
 }
 
-/* =========================================================
-   REUSABLE — racing-stripe section divider, for pages beyond the hero
-   <div class="stripe-divider"></div>
-   ========================================================= */
 
 .stripe-divider {
     height: 3px;
@@ -545,11 +501,6 @@ button:focus-visible {
     opacity: 0.85;
 }
 
-/* =========================================================
-   REUSABLE — scroll-in reveal, for future sections/pages
-   add class="reveal" to any block; add data-delay="1|2|3" for stagger
-   (pairs with an IntersectionObserver toggling a .is-visible class)
-   ========================================================= */
 
 .reveal {
     opacity: 0;
