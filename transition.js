@@ -1,26 +1,8 @@
-/*
-   Pranjal's F1 portfolio — page transition
-   ------------------------------------------------
-   What this does:
-   1. Injects a full-screen "wipe" overlay with an SVG car + your name
-      as a livery decal, riding at the leading edge.
-   2. When someone clicks an internal nav link, the car sweeps in from
-      the left and covers the whole screen — THEN we navigate.
-   3. On the next page's load, the overlay starts already covering the
-      screen (no flash) and the car continues sweeping off to the right,
-      revealing the new page. Same motion, split across two page loads.
-   4. Respects prefers-reduced-motion (skips straight to navigation).
-
-   Setup: add this before </body> on every page:
-     <script src="transition.js"></script>
-   No other HTML edits needed — the overlay is built in JS.
-   Requires style.css (the .page-transition rules) to already be loaded.
-*/
 
 (function () {
     "use strict";
 
-    var DUR = 550; // ms, must match the CSS transition duration
+    var DUR = 550; 
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     var DRIVER_NAME = "PRANJAL CHAUDHARY";
@@ -81,7 +63,7 @@
             return false;
         }
         if (url.origin !== window.location.origin) return false;
-        if (url.pathname === window.location.pathname) return false; // already here
+        if (url.pathname === window.location.pathname) return false; 
         return true;
     }
 
@@ -89,19 +71,17 @@
         var overlay = buildOverlay();
 
         if (reduceMotion) {
-            // No animation — just clear any stale flag and get out of the way.
+           
             sessionStorage.removeItem("ftIncoming");
             return;
         }
 
-        // --- Arriving on this page as part of a transition already in flight ---
+       
         if (sessionStorage.getItem("ftIncoming") === "1") {
             sessionStorage.removeItem("ftIncoming");
 
-            overlay.classList.add("is-active"); // start already covering, no flash
-            // Force layout so the browser registers the "covered" state
-            // before we animate away from it.
-            // eslint-disable-next-line no-unused-expressions
+            overlay.classList.add("is-active"); 
+          
             overlay.offsetHeight;
 
             requestAnimationFrame(function () {
@@ -114,7 +94,7 @@
             }, DUR + 50);
         }
 
-        // --- Wire up nav links for the next transition ---
+
         var navLinks = document.querySelectorAll("nav a[href], .nav a[href]");
         navLinks.forEach(function (link) {
             if (!isInternalNavLink(link)) return;
@@ -123,7 +103,7 @@
                 e.preventDefault();
                 var destination = link.href;
 
-                overlay.classList.add("is-active"); // sweep in, cover the screen
+                overlay.classList.add("is-active"); 
 
                 setTimeout(function () {
                     sessionStorage.setItem("ftIncoming", "1");
