@@ -1,0 +1,389 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+ min-height: 100vh; 
+ 
+ background: #080808;
+ color: white;
+ font-family: Arial, Helvetica, sans-serif;
+
+ overflow: hidden;
+}
+
+/* navigation section
+*/
+nav {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 50px;
+
+    background: rgba(8,8,8,0.85);
+
+    border-bottom: 1px solid rgba(255,255,255,0.85);
+
+    backdrop-filter: blur(12px);
+
+    z-index: 1000;
+}
+
+/* logo*/
+logo {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+}
+.logo img {
+    width: 45px;
+    height: 45px;
+
+    object-fit: contain;
+}
+
+/*nav lines*/
+.navs {
+    display: flex;
+    align-items: center;
+
+    gap: 35px;
+
+}
+
+.navs a {
+    position: relative;
+    color: rgba(255,255,255,0.75);
+
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+
+    transition: color 0.25s ease,
+            transform 0.25s ease;
+}
+
+.navs a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0;
+    height: 2px;
+    background: #e10600;
+
+    transition: width 0.25s ease;
+}
+
+.navs a:hover {
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+.navs a:hover::after 
+{
+    width: 100%;
+}
+/*main area*/
+ main {
+    width: 100%;
+    padding-top: 80px;
+
+ }
+
+ /*gs*/
+ section {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 100px 8%;
+ }
+/*home section*/
+section h2 {
+    margin-bottom: 40px;
+    font-size: clamp(2rem,5vw,5rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/*racing accent*/
+section h2 ::before {
+    content: "///";
+    margin-right: 15px;
+    color: #e10600;
+    font-size: 0.6em;
+
+}
+/*garage*/
+#garage {
+    min-height: calc(100vh -80px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 8%;
+    padding-right: 8%;
+    overflow: hidden;
+    background:
+     radial-gradient(
+        circle at 70% 50%
+        rgba(226,6,0,0.25),
+        transparent 45%
+     ),
+
+     linear-gradient(
+        135deg,
+        #100000
+        #080808 60%
+     );
+
+}
+/*giant decorative text*/
+#garage::before {
+    content: "01";
+    position:absolute;
+    right: 5%;
+    bottom: -5%;
+    font-size: clamp(15rem, 30vw, 35rem);
+    font-weight: 900;
+    color: rgba(255,255,255,0.025);
+    line-height: 1;
+    pointer-events: none;
+}
+
+#garage h1 {
+    position: relative;
+    font-size: clamp(3rem, 9vw, 9rem);
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    max-width: 1000px;
+
+}
+#garage p {
+    position: relative;
+    margin-bottom: 20px;
+   color: rgba(255,255,255,0.6);
+    font-family: monospace;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+}
+
+/*project card*/
+.projects {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.project {
+    min-height: 350px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition:  transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}  
+
+.project:hover {
+    transform: tanslateY(-8px);
+    border-color: #e10600;
+    background: #151515;
+
+}
+
+.project h3 {
+    font-size:1.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.project p {
+    color: #888;
+    line-height: 1.7;
+}
+
+/*links*/
+button,
+.project a {
+    display: inline-block;
+    width: fit-content;
+    padding: 13px 25px;
+    background: #e10600;
+    color: white;
+    border: none;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}   
+
+button:hover,
+.project a:hover {
+    background: #ff1a14;
+    transform:translateX(5px)
+}
+
+/*skills*/
+.skill {
+    width: min(700px, 100%);
+    margin-bottom: 25px;
+}
+.skill span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-family: monospace;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+progress {
+    width: 100%;
+    height: 8px;
+    appearance: none;
+}
+
+/*chrome*/
+progress::-webkit-progress-bar {
+    background: #222;
+}
+
+progress::-webkit-progress-value {
+    background: #e10600;
+}
+
+/*firefox*/
+progress::-moz-progress-bar {
+    background: #e10600;     
+}
+
+/*manager*/
+#manager form {
+    width: min(700px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#manager label {
+    margin-top: 15px;
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+}
+
+#manager input,
+#manager textarea {
+    width: 100%;
+    padding: 16px;
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    font-family: inherit;
+    transition: border-color 0.25 ease;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+    border-color: #e10600;
+}
+
+/*footer*/
+
+footer {
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 40px 8%;
+    font-size: 12px;
+    color: #666;
+}
+
+/*mobile*/
+@media (max-width: 768px) {
+    nav {
+        padding: 0 20px;
+         height: 70px;}
+    }
+    .logo {
+        font-size: 15px;
+    }
+    .navs {
+        gap: 15px;
+    }
+    .navs a {
+        font-size: 9px;
+        letter-spacing: 0.08em;
+    }
+    main {
+        padding-top: 70px;
+    }
+    section {
+        padding: 80px 5%;
+    }
+    #garage {
+        min-height: calc(100vh - 70px);
+        padding-right: 7%;
+    }
+    #garage h1 {
+        font-size: clamp(3rem, 15vw, 6rem);
+    }
+    .projects {
+        grid-template-columns: 1fr;
+    }
+    section h2 {
+        font-size: 2.5rem;
+    }
+    /*very small screen*/
+    @media (max-width: 400px) {
+        .navs {
+            gaps: 10px;
+        }
+        .navs a {
+            font-size: 8px;
+        }
+         .logo {
+            font-size: 12px;
+        }
+    .logo img {
+        width: 30px;
+        height: 30px;
+    }
+}
