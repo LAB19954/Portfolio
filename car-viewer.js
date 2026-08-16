@@ -8,12 +8,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const MODEL_URL = "f2008.glb";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// --- EDIT ME: map material-name keywords on the car to info about you ---
-// The model's real material names (checked against the file): front_nose,
-// side_left, side_right, cockpit, glass.002, steeringwheel, steer_carbon,
-// tread.002, Suspcar, susbody, calliper, wood, tcam, mirror, cover,
-// material, carbon, carbon2. Every material on the car maps to something
-// below, with a broad "chassis" catch-all at the end so nothing is dead.
+
 const DRIVER_BIO = {
     title: "THE DRIVER",
     name: "Pranjal Chaudhary",
