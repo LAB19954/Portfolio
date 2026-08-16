@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pranjal Chaudhary | Developer portfolio">
+    <title>Pranjal | My F1 Race</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- lets car-viewer.js load Three.js from CDN as an ES module -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- signature intro: 5-light F1 start sequence, built by transition.js on the first
+         visit of a session. Left empty here on purpose — transition.js injects it. -->
+
+    <nav aria-label="Main navigation">
+        <div class="logo">
+            <a href="home.html" aria-label="Pranjal home">
+                <img src="logo.png" alt="Pranjal logo">
+            </a>
+            <span>Pranjal</span>
+        </div>
+
+        <div class="nav">
+            <a href="home.html">Garage</a>
+            <a href="about.html">Driver</a>
+            <a href="projects.html">Race</a>
+            <a href="contact.html">Manager</a>
+        </div>
+    </nav>
+
+    <main>
+        <header id="home" class="hero">
+            <img class="bg-logo" src="logo.png" alt="">
+
+            <p>PRANJAL CHAUDHARY</p>
+
+            <h1>
+                BUILD<br>
+                DRIVE<br>
+                REPEAT
+            </h1>
+
+            <p>Lets Goooooooo</p>
+
+            <button type="button"><span>ENTER GARAGE</span></button>
+        </header>
+
+        <section class="car-showcase">
+            <div class="car-canvas-wrap" id="carViewer">
+                <canvas id="carCanvas"></canvas>
+                <p class="car-loading" id="carLoading">LOADING TELEMETRY&hellip; 0%</p>
+            </div>
+            <p class="model-credit">
+                This work is based on "2008 Ferrari F2008"
+                (https://sketchfab.com/3d-models/2008-ferrari-f2008-0476bd73b8d84e0e99d5197140bc22d6)
+                by Dave Love SketchFab (https://sketchfab.com/Tyler_Dave),
+                licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/).
+            </p>
+        </section>
+    </main>
+
+    <script src="transition.js"></script>
+    <script type="module" src="car-viewer.js"></script>
+
+</body>
+</html>
