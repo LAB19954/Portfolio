@@ -1,45 +1,12 @@
-/*
-   Pranjal's F1 portfolio — 3D car showcase
-   ------------------------------------------------
-   Loads car-model/scene.gltf into an orbit-controllable viewer.
 
-   Requires an import map in the page's <head> (Three.js has no bundler here,
-   so the browser needs to know where to fetch it from):
-
-     <script type="importmap">
-     {
-       "imports": {
-         "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-         "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-       }
-     }
-     </script>
-     <script type="module" src="car-viewer.js"></script>
-
-   And this markup wherever you want the showcase (e.g. Driver or Race page):
-
-     <section class="car-showcase">
-       <div class="car-canvas-wrap" id="carViewer">
-         <canvas id="carCanvas"></canvas>
-         <p class="car-loading" id="carLoading">LOADING TELEMETRY… 0%</p>
-       </div>
-       <p class="model-credit">
-         This work is based on "2008 Ferrari F2008"
-         (https://sketchfab.com/3d-models/2008-ferrari-f2008-0476bd73b8d84e0e99d5197140bc22d6)
-         by Dave Love SketchFab (https://sketchfab.com/Tyler_Dave),
-         licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/).
-       </p>
-     </section>
-
-   The model only loads once #carViewer scrolls into view, so it doesn't
-   slow down the initial page load on Garage/Driver/etc.
-*/
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const MODEL_URL = "car-model/scene.gltf";
+// single-file model — geometry is Draco-compressed, so DRACOLoader below is required
+const MODEL_URL = "f2008.glb";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function initViewer(container) {
@@ -94,7 +61,11 @@ function initViewer(container) {
     resizeObserver.observe(container);
     resize();
 
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/");
+
     const loader = new GLTFLoader();
+    loader.setDRACOLoader(dracoLoader);
     loader.load(
         MODEL_URL,
         function (gltf) {
