@@ -826,3 +826,85 @@ button:focus-visible {
     .car-showcase { padding: 70px 6% 60px; }
     .car-canvas-wrap { height: 50vh; }
 }
+
+.car-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+
+    opacity: 0;
+    transition: opacity 0.5s ease 0.3s;
+    pointer-events: none;
+}
+
+.car-hint.is-visible {
+    opacity: 1;
+}
+
+.car-info-panel {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    max-width: min(320px, calc(100% - 40px));
+
+    padding: 18px 20px;
+    background: rgba(10, 10, 10, 0.86);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--ferrari-red);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.car-info-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.car-info-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--giallo);
+    margin-bottom: 8px;
+}
+
+.car-info-body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--off-white);
+}
+
+.car-info-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.car-info-close:hover {
+    color: #fff;
+}
