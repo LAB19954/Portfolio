@@ -18,7 +18,7 @@
     </script>
 </head>
 
-<body>
+<body data-page="garage">
 
     <!-- signature intro: 5-light F1 start sequence, built by transition.js on the first
          visit of a session. Left empty here on purpose — transition.js injects it. -->
@@ -33,9 +33,9 @@
 
         <div class="nav">
             <a href="home.html">Garage</a>
-            <a href="about.html">Driver</a>
-            <a href="projects.html">Race</a>
-            <a href="contact.html">Manager</a>
+            <a href="about.html" id="navDriverLink">Driver</a>
+            <a href="projects.html" id="navRaceLink">Race</a>
+            <a href="mailto:pranjalchaudhary@iitgn.ac.in?subject=Portfolio%20%7C%20Let%27s%20talk">Manager</a>
         </div>
     </nav>
 
@@ -51,12 +51,19 @@
                 REPEAT
             </h1>
 
-            <p>Lets Goooooooo</p>
+            <p class="hero-kicker">LETS GOOOOOOOO</p>
 
             <button type="button" id="enterGarageBtn"><span>ENTER GARAGE</span></button>
         </header>
 
-        <section class="car-showcase" id="showcase">
+        <section class="car-showcase" id="showcase" aria-label="3D garage">
+            <div class="showcase-head">
+                <span class="showcase-number">01</span>
+                <div>
+                    <p class="showcase-label">THE GARAGE</p>
+                    <p class="showcase-note">The car is the interface. Go on, touch it.</p>
+                </div>
+            </div>
             <div class="car-canvas-wrap" id="carViewer">
                 <canvas id="carCanvas"></canvas>
                 <p class="car-loading" id="carLoading">LOADING TELEMETRY&hellip; 0%</p>
@@ -70,6 +77,10 @@
             </p>
         </section>
     </main>
+
+    <noscript>
+        <p class="noscript-note">JavaScript is required for the interactive garage experience. You can still use the navigation above.</p>
+    </noscript>
 
     <script src="transition.js"></script>
     <script type="module" src="car-viewer.js"></script>
