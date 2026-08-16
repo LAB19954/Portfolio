@@ -8,11 +8,31 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const MODEL_URL = "f2008.glb";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// --- EDIT ME: map material-name keywords on the car to info about you ---
+// The model's real material names (checked against the file): front_nose,
+// side_left, side_right, cockpit, glass.002, steeringwheel, steer_carbon,
+// tread.002, Suspcar, susbody, calliper, wood, tcam, mirror, cover,
+// material, carbon, carbon2. Every material on the car maps to something
+// below, with a broad "chassis" catch-all at the end so nothing is dead.
+const DRIVER_BIO = {
+    title: "THE DRIVER",
+    name: "Pranjal Chaudhary",
+    department: "Mechanical Engineering",
+    body: "Mechanical engineering by degree, web development by choice. I like building things, breaking them, fixing them, and occasionally asking why I started at 3 AM.",
+    hobbies: [
+        "Watching F1",
+        "Anime",
+        "Binge-watching movies",
+        "Web development",
+        "Building weird side quests"
+    ]
+};
+
 const HOTSPOTS = [
     {
         match: ["cockpit", "glass"],
-        title: "THE DRIVER",
-        body: "Pranjal Chaudhary — B.Tech at IIT Gandhinagar, builds fast, detail-obsessed web experiences. This whole site is one of them."
+        title: DRIVER_BIO.title,
+        body: DRIVER_BIO.body
     },
     {
         match: ["side_left", "side_right", "side", "susbody", "suspcar", "calliper"],
@@ -55,6 +75,61 @@ function findHotspot(materialName) {
 var viewerStarted = false;
 var viewerContainer = null;
 
+// shared state so nav clicks (outside initViewer's closure) can drive the camera
+var viewerRefs = {
+    camera: null,
+    controls: null,
+    carModel: null,
+    cockpitTarget: null,
+    ready: false,
+    readyCallbacks: [],
+    tween: null // { startPos, endPos, startTarget, endTarget, startTime, duration }
+};
+
+function onCarReady(callback) {
+    if (viewerRefs.ready) callback();
+    else viewerRefs.readyCallbacks.push(callback);
+}
+
+function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function flyCameraTo(targetPos, lookAtPos, duration, onComplete) {
+    if (!viewerRefs.camera || !viewerRefs.controls) return;
+
+    if (reduceMotion) {
+        viewerRefs.camera.position.copy(targetPos);
+        viewerRefs.controls.target.copy(lookAtPos);
+        if (typeof onComplete === "function") onComplete();
+        return;
+    }
+
+    viewerRefs.controls.autoRotate = false;
+
+    viewerRefs.tween = {
+        startPos: viewerRefs.camera.position.clone(),
+        endPos: targetPos.clone(),
+        startTarget: viewerRefs.controls.target.clone(),
+        endTarget: lookAtPos.clone(),
+        startTime: performance.now(),
+        duration: duration || 1200,
+        onComplete: onComplete || null
+    };
+}
+
+function zoomToCockpit(onComplete) {
+    if (!viewerRefs.carModel) return;
+
+    var lookAt = viewerRefs.cockpitTarget || new THREE.Vector3(0, 0.5, 0);
+
+    // Put the camera just above and to the side of the cockpit so the
+    // movement feels like a deliberate "camera rig" move, not a jump.
+    var camPos = lookAt.clone().add(new THREE.Vector3(0.9, 0.45, 1.25));
+
+    flyCameraTo(camPos, lookAt, 1400, onComplete);
+}
+
 function ensureInfoPanel(container) {
     var panel = container.querySelector(".car-info-panel");
     if (panel) return panel;
@@ -79,6 +154,72 @@ function showInfoPanel(container, hotspot) {
     panel.querySelector(".car-info-title").textContent = hotspot.title;
     panel.querySelector(".car-info-body").textContent = hotspot.body;
     panel.classList.add("is-open");
+}
+
+function ensureDriverPanel(container) {
+    var panel = container.querySelector(".driver-profile-panel");
+    if (panel) return panel;
+
+    panel = document.createElement("aside");
+    panel.className = "driver-profile-panel";
+    panel.setAttribute("aria-label", "Driver profile");
+    panel.innerHTML =
+        '<div class="driver-panel-top">' +
+            '<span class="driver-panel-kicker">COCKPIT // DRIVER PROFILE</span>' +
+            '<button type="button" class="driver-panel-close" aria-label="Close driver profile">×</button>' +
+        '</div>' +
+        '<h2 class="driver-panel-name"></h2>' +
+        '<p class="driver-panel-dept"></p>' +
+        '<p class="driver-panel-body"></p>' +
+        '<div class="driver-hobbies"></div>' +
+        '<div class="driver-panel-footer"><span>STATUS</span><strong>READY TO BUILD</strong></div>';
+
+    container.appendChild(panel);
+
+    panel.querySelector(".driver-panel-close").addEventListener("click", function () {
+        panel.classList.remove("is-open");
+        container.classList.remove("is-cockpit");
+    });
+
+    return panel;
+}
+
+function showDriverPanel(container) {
+    var panel = ensureDriverPanel(container);
+
+    panel.querySelector(".driver-panel-name").textContent = DRIVER_BIO.name;
+    panel.querySelector(".driver-panel-dept").textContent = DRIVER_BIO.department;
+    panel.querySelector(".driver-panel-body").textContent = DRIVER_BIO.body;
+
+    var hobbies = panel.querySelector(".driver-hobbies");
+    hobbies.innerHTML = "";
+    DRIVER_BIO.hobbies.forEach(function (hobby) {
+        var chip = document.createElement("span");
+        chip.className = "driver-hobby";
+        chip.textContent = hobby;
+        hobbies.appendChild(chip);
+    });
+
+    container.classList.add("is-cockpit");
+    panel.classList.add("is-open");
+}
+
+function goToDriverProfile() {
+    if (!viewerContainer) return;
+
+    var section = document.getElementById("showcase") || viewerContainer;
+    section.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start"
+    });
+
+    startViewer();
+
+    onCarReady(function () {
+        zoomToCockpit(function () {
+            showDriverPanel(viewerContainer);
+        });
+    });
 }
 
 function initViewer(container) {
@@ -133,6 +274,9 @@ function initViewer(container) {
     resizeObserver.observe(container);
     resize();
 
+    viewerRefs.camera = camera;
+    viewerRefs.controls = controls;
+
     var dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/");
 
@@ -163,6 +307,26 @@ function initViewer(container) {
 
             scene.add(model);
             carModel = model;
+            viewerRefs.carModel = model;
+
+            // find cockpit/glass meshes specifically so we know where to zoom
+            var cockpitBox = new THREE.Box3();
+            var foundCockpit = false;
+            model.traverse(function (obj) {
+                if (!obj.isMesh || !obj.material) return;
+                var mn = (obj.material.name || "").toLowerCase();
+                if (mn.indexOf("cockpit") !== -1 || mn.indexOf("glass") !== -1) {
+                    cockpitBox.expandByObject(obj);
+                    foundCockpit = true;
+                }
+            });
+            viewerRefs.cockpitTarget = foundCockpit
+                ? cockpitBox.getCenter(new THREE.Vector3())
+                : new THREE.Vector3(0, size.y * scale * 0.3, 0);
+
+            viewerRefs.ready = true;
+            viewerRefs.readyCallbacks.forEach(function (cb) { cb(); });
+            viewerRefs.readyCallbacks = [];
 
             if (loadingEl) {
                 loadingEl.style.opacity = "0";
@@ -228,6 +392,26 @@ function initViewer(container) {
 
     (function animate() {
         requestAnimationFrame(animate);
+
+        if (viewerRefs.tween) {
+            var tween = viewerRefs.tween;
+            var elapsed = performance.now() - tween.startTime;
+            var progress = Math.min(1, elapsed / tween.duration);
+            var eased = easeInOutCubic(progress);
+
+            camera.position.lerpVectors(tween.startPos, tween.endPos, eased);
+            controls.target.lerpVectors(tween.startTarget, tween.endTarget, eased);
+
+            if (progress >= 1) {
+                viewerRefs.tween = null;
+                if (typeof tween.onComplete === "function") {
+                    var callback = tween.onComplete;
+                    tween.onComplete = null;
+                    callback();
+                }
+            }
+        }
+
         controls.update();
         renderer.render(scene, camera);
     })();
@@ -266,7 +450,24 @@ function init() {
             startViewer();
         });
     }
+
+    var driverLink = document.getElementById("navDriverLink");
+    if (driverLink) {
+        driverLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            goToDriverProfile();
+        });
+    }
 }
+
+window.f1Viewer = {
+    goToDriverProfile: goToDriverProfile,
+    zoomToCockpit: function () {
+        onCarReady(function () {
+            zoomToCockpit();
+        });
+    }
+};
 
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
