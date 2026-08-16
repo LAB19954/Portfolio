@@ -1,13 +1,4 @@
-/*
-   PRANJAL // PORTFOLIO INTERACTION LAYER
-   --------------------------------------
-   One small file shared by every page.
 
-   It handles three things:
-   1. the little F1-style loading quote,
-   2. smoother page-to-page navigation,
-   3. live GitHub cards on the Race page.
-*/
 
 (function () {
     "use strict";
@@ -44,7 +35,7 @@
 
         document.body.appendChild(loader);
 
-        // Let the page breathe for a moment, then get out of the way.
+       
         window.setTimeout(function () {
             loader.classList.add("is-done");
             window.setTimeout(function () {
