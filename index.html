@@ -35,7 +35,7 @@
             <a href="home.html">Garage</a>
             <a href="about.html">Driver</a>
             <a href="projects.html">Race</a>
-            <a href="pranjalchaudhary@iitgn.ac.in">Manager</a>
+            <a href="contact.html">Manager</a>
         </div>
     </nav>
 
@@ -53,13 +53,14 @@
 
             <p>Lets Goooooooo</p>
 
-            <button type="button"><span>ENTER GARAGE</span></button>
+            <button type="button" id="enterGarageBtn"><span>ENTER GARAGE</span></button>
         </header>
 
-        <section class="car-showcase">
+        <section class="car-showcase" id="showcase">
             <div class="car-canvas-wrap" id="carViewer">
                 <canvas id="carCanvas"></canvas>
                 <p class="car-loading" id="carLoading">LOADING TELEMETRY&hellip; 0%</p>
+                <p class="car-hint" id="carHint">Drag to rotate &middot; click the car to explore</p>
             </div>
             <p class="model-credit">
                 This work is based on "2008 Ferrari F2008"
