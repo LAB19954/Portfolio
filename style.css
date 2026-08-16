@@ -1,10 +1,4 @@
-/*
-   Pranjal's F1 portfolio
-   Direction: Scuderia livery â€” carbon black, Ferrari red, a flash of Giallo Modena.
-   Typeface is Titillium Web on purpose: it's F1's actual broadcast/branding font,
-   not a generic condensed sans standing in for "racing."
-   Signature moment: a real 5-light F1 start sequence gates entry to the page.
-*/
+
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&family=Space+Mono:wght@400;700&display=swap');
 
@@ -70,23 +64,7 @@ html { scrollbar-color: var(--ferrari-red-deep) var(--carbon-black); scrollbar-w
 
 a { font-family: inherit; }
 
-/* =========================================================
-   SIGNATURE â€” start-lights intro
-   Markup needed once, right after <body>:
 
-   <div class="start-lights" aria-hidden="true">
-     <span class="light"></span>
-     <span class="light"></span>
-     <span class="light"></span>
-     <span class="light"></span>
-     <span class="light"></span>
-   </div>
-
-   Five lights fire in sequence like an F1 grid start, hold red,
-   then go out together and the page is "released." Runs once on load,
-   then removes itself from interaction (pointer-events: none) and
-   is skipped entirely for reduced-motion users.
-   ========================================================= */
 
 .start-lights {
     position: fixed;
