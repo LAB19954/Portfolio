@@ -1,4 +1,10 @@
-
+/*
+   Pranjal's F1 portfolio
+   Direction: Scuderia livery â€” carbon black, Ferrari red, a flash of Giallo Modena.
+   Typeface is Titillium Web on purpose: it's F1's actual broadcast/branding font,
+   not a generic condensed sans standing in for "racing."
+   Signature moment: a real 5-light F1 start sequence gates entry to the page.
+*/
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&family=Space+Mono:wght@400;700&display=swap');
 
@@ -14,7 +20,7 @@
     --carbon-black-2: #121212;
     --ferrari-red: #E10600;
     --ferrari-red-deep: #9E0500;
-    --giallo: #FFD400;          /* Scuderia shield yellow — used sparingly, as a spark */
+    --giallo: #FFD400;          /* Scuderia shield yellow â€” used sparingly, as a spark */
     --off-white: #F3F0E8;
     --muted: rgba(243, 240, 232, 0.62);
     --muted-2: rgba(243, 240, 232, 0.38);
@@ -41,7 +47,7 @@ body {
     color: var(--off-white);
     font-family: var(--font-body);
 
-    /* faint carbon-fibre weave, not decoration for its own sake — grounds the black in a material */
+    /* faint carbon-fibre weave, not decoration for its own sake â€” grounds the black in a material */
     background-image:
         repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px),
         repeating-linear-gradient(-45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px);
@@ -52,7 +58,7 @@ body {
     color: var(--off-white);
 }
 
-/* thin red scrollbar — small detail, feels intentional */
+/* thin red scrollbar â€” small detail, feels intentional */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--carbon-black); }
 ::-webkit-scrollbar-thumb {
@@ -65,7 +71,7 @@ html { scrollbar-color: var(--ferrari-red-deep) var(--carbon-black); scrollbar-w
 a { font-family: inherit; }
 
 /* =========================================================
-   SIGNATURE — start-lights intro
+   SIGNATURE â€” start-lights intro
    Markup needed once, right after <body>:
 
    <div class="start-lights" aria-hidden="true">
@@ -290,7 +296,7 @@ button:focus-visible {
         linear-gradient(120deg, #150000 0%, #0a0a0a 55%, #050505 100%);
 }
 
-/* the actual logo, huge and faint, off to the side — the "background logo" ask */
+/* the actual logo, huge and faint, off to the side â€” the "background logo" ask */
 #home .bg-logo {
     position: absolute;
     right: -6%;
@@ -432,7 +438,7 @@ button:focus-visible {
     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* checkered-flag sweep on hover — the button is styled as a finish line you cross */
+/* checkered-flag sweep on hover â€” the button is styled as a finish line you cross */
 #home button::before {
     content: "";
     position: absolute;
@@ -470,7 +476,7 @@ button:focus-visible {
     transform: translateX(3px) scale(0.98);
 }
 
-/* load-in — now sequenced to start right as the lights go out */
+/* load-in â€” now sequenced to start right as the lights go out */
 #home .eyebrow,
 #home p:first-child {
     animation: fadeUp 0.7s var(--ease-out) 2.6s both;
@@ -523,7 +529,7 @@ button:focus-visible {
 }
 
 /* =========================================================
-   REUSABLE — racing-stripe section divider, for pages beyond the hero
+   REUSABLE â€” racing-stripe section divider, for pages beyond the hero
    <div class="stripe-divider"></div>
    ========================================================= */
 
@@ -540,7 +546,7 @@ button:focus-visible {
 }
 
 /* =========================================================
-   REUSABLE — scroll-in reveal, for future sections/pages
+   REUSABLE â€” scroll-in reveal, for future sections/pages
    add class="reveal" to any block; add data-delay="1|2|3" for stagger
    (pairs with an IntersectionObserver toggling a .is-visible class)
    ========================================================= */
@@ -644,7 +650,7 @@ button:focus-visible {
 }
 
 /* =========================================================
-   PAGE TRANSITION — injected by transition.js, no HTML edits needed
+   PAGE TRANSITION â€” injected by transition.js, no HTML edits needed
    beyond adding <script src="transition.js"></script> before </body>
    on every page. See transition.js for behaviour.
    ========================================================= */
@@ -755,7 +761,7 @@ button:focus-visible {
 }
 
 /* =========================================================
-   3D CAR SHOWCASE — pairs with car-viewer.js
+   3D CAR SHOWCASE â€” pairs with car-viewer.js
    ========================================================= */
 
 .car-showcase {
@@ -905,7 +911,7 @@ button:focus-visible {
 
 
 /* =========================================================
-   GARAGE ADDITIONS — interactive polish
+   GARAGE ADDITIONS â€” interactive polish
    ========================================================= */
 
 .hero-kicker {
@@ -1447,4 +1453,491 @@ body.modal-open {
     .race-dialog {
         max-height: 96vh;
     }
+}
+
+/* =========================================================
+   FULL PAGE SECTIONS
+   These pages share the same visual language as the garage,
+   but each one has its own little bit of personality.
+   ========================================================= */
+
+.subpage {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 92% 18%, rgba(225, 6, 0, .12), transparent 26%),
+        linear-gradient(160deg, #090909 0%, #090909 55%, #130000 100%);
+}
+
+.subpage::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .22;
+    background:
+        linear-gradient(90deg, transparent 0 49%, rgba(255,255,255,.025) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 0 49%, rgba(255,255,255,.018) 50%, transparent 51%);
+    background-size: 80px 80px;
+}
+
+.page-hero {
+    position: relative;
+    min-height: 92vh;
+    padding: 150px 9% 90px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+    align-items: end;
+    gap: 7vw;
+    overflow: hidden;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.page-hero::after {
+    content: "";
+    position: absolute;
+    right: -10%;
+    bottom: 10%;
+    width: 68%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(225,6,0,.7), transparent);
+    transform: rotate(-11deg);
+    opacity: .65;
+}
+
+.page-hero::before {
+    content: "02";
+    position: absolute;
+    right: 2%;
+    bottom: -8%;
+    font-family: var(--font-display);
+    font-size: clamp(18rem, 38vw, 40rem);
+    font-style: italic;
+    font-weight: 900;
+    line-height: .72;
+    color: rgba(255,255,255,.025);
+    pointer-events: none;
+}
+
+.projects-hero::before { content: "03"; }
+.manager-hero::before { content: "04"; }
+
+.page-hero-copy,
+.page-hero-data,
+.contact-card {
+    position: relative;
+    z-index: 2;
+}
+
+.section-kicker {
+    margin-bottom: 18px;
+    color: var(--giallo);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.page-hero h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4.4rem, 10vw, 10rem);
+    line-height: .83;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -.04em;
+}
+
+.page-hero-lede {
+    max-width: 700px;
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+.page-hero-data {
+    align-self: end;
+    border-left: 1px solid var(--hairline);
+}
+
+.page-hero-data > div {
+    padding: 18px 0 18px 22px;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.page-hero-data > div:last-child { border-bottom: 0; }
+
+.page-hero-data span,
+.credit-meta span,
+.contact-card > span {
+    display: block;
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.page-hero-data strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--off-white);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-style: italic;
+    font-weight: 900;
+}
+
+.story-section,
+.hobbies-section,
+.model-credit-section,
+.repo-section,
+.manager-note {
+    position: relative;
+    padding: 120px 9%;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.story-grid,
+.model-credit-grid,
+.manager-note {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 8vw;
+    align-items: start;
+}
+
+.story-section h2,
+.hobbies-section h2,
+.model-credit-section h2,
+.repo-section h2,
+.manager-note h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 6vw, 6.7rem);
+    font-style: italic;
+    font-weight: 900;
+    line-height: .88;
+    text-transform: uppercase;
+}
+
+.story-copy {
+    max-width: 700px;
+}
+
+.story-copy p,
+.model-credit-copy > p,
+.section-intro,
+.manager-note > p {
+    margin-bottom: 22px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+.section-heading-row {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.section-side-note {
+    margin: 0 0 8px;
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .06em;
+}
+
+.hobby-grid {
+    margin-top: 55px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--hairline);
+    border-left: 1px solid var(--hairline);
+}
+
+.hobby-grid article {
+    min-height: 260px;
+    padding: 25px;
+    border-right: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    background: rgba(255,255,255,.015);
+    transition: transform .3s var(--ease-out), background .3s ease, border-color .3s ease;
+}
+
+.hobby-grid article:hover {
+    transform: translateY(-5px);
+    background: rgba(225,6,0,.04);
+    border-color: rgba(225,6,0,.4);
+}
+
+.hobby-grid article > span {
+    color: var(--giallo);
+    font-family: var(--font-mono);
+    font-size: 10px;
+}
+
+.hobby-grid h3 {
+    margin-top: 50px;
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-style: italic;
+    font-weight: 900;
+}
+
+.hobby-grid p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.driver-cta {
+    min-height: 55vh;
+    padding: 100px 9%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 40px;
+    background:
+        radial-gradient(circle at 80% 60%, rgba(225,6,0,.12), transparent 28%),
+        #080808;
+}
+
+.section-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 20px;
+    border: 1px solid var(--ferrari-red);
+    background: var(--ferrari-red);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.section-button:hover {
+    transform: translateX(5px);
+    background: #ff1b14;
+    box-shadow: 0 12px 28px rgba(225,6,0,.2);
+}
+
+.section-button-quiet {
+    background: transparent;
+    color: var(--off-white);
+    border-color: var(--hairline);
+}
+
+.section-button-quiet:hover {
+    border-color: var(--ferrari-red);
+    background: rgba(225,6,0,.08);
+}
+
+.credit-meta {
+    margin: 28px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+}
+
+.credit-meta div {
+    padding: 18px;
+    border-right: 1px solid var(--hairline);
+}
+
+.credit-meta div:last-child { border-right: 0; }
+
+.credit-meta strong {
+    display: block;
+    margin-top: 7px;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.page-repo-grid {
+    margin-top: 35px;
+}
+
+.contact-card {
+    max-width: 500px;
+    justify-self: end;
+    padding: 30px;
+    background: rgba(11,11,11,.72);
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--ferrari-red);
+    box-shadow: 0 30px 80px rgba(0,0,0,.32);
+}
+
+.contact-card > span { color: var(--giallo); }
+
+.contact-card > a:not(.section-button) {
+    display: block;
+    margin: 20px 0 13px;
+    color: var(--off-white);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-style: italic;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.contact-card p {
+    margin-bottom: 22px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.manager-note {
+    min-height: 50vh;
+    align-items: center;
+    background: linear-gradient(90deg, #080808, #100000);
+}
+
+/* =========================================================
+   LOADING QUOTE
+   ========================================================= */
+
+.quote-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: grid;
+    place-items: center;
+    padding: 30px;
+    background: #050505;
+    transition: opacity .6s var(--ease-in-out), visibility .6s var(--ease-in-out);
+}
+
+.quote-loader.is-done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.quote-loader::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .18;
+    background:
+        repeating-linear-gradient(90deg, transparent 0 80px, rgba(255,255,255,.04) 81px, transparent 82px),
+        repeating-linear-gradient(0deg, transparent 0 80px, rgba(255,255,255,.025) 81px, transparent 82px);
+}
+
+.quote-loader-box {
+    position: relative;
+    width: min(700px, 100%);
+    text-align: center;
+}
+
+.quote-loader-lights {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.quote-loader-lights span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #1c0000;
+    border: 1px solid rgba(255,255,255,.08);
+    animation: loaderLight 1.5s ease infinite;
+}
+
+.quote-loader-lights span:nth-child(2) { animation-delay: .15s; }
+.quote-loader-lights span:nth-child(3) { animation-delay: .30s; }
+.quote-loader-lights span:nth-child(4) { animation-delay: .45s; }
+.quote-loader-lights span:nth-child(5) { animation-delay: .60s; }
+
+@keyframes loaderLight {
+    0%, 100% { background: #1c0000; box-shadow: none; }
+    35%, 60% { background: var(--ferrari-red); box-shadow: 0 0 18px rgba(225,6,0,.7); }
+}
+
+.quote-loader-kicker {
+    color: var(--giallo);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .16em;
+}
+
+.quote-loader-text {
+    margin-top: 16px;
+    color: var(--off-white);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    font-style: italic;
+    font-weight: 900;
+    line-height: .98;
+}
+
+.quote-loader-sub {
+    margin-top: 20px;
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quote-loader { display: none; }
+}
+
+@media (max-width: 900px) {
+    .page-hero,
+    .story-grid,
+    .model-credit-grid,
+    .manager-note {
+        grid-template-columns: 1fr;
+    }
+
+    .page-hero { min-height: auto; padding-top: 130px; }
+    .page-hero-data { align-self: start; width: min(520px, 100%); }
+    .contact-card { justify-self: start; }
+    .hobby-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .driver-cta { align-items: flex-start; flex-direction: column; }
+    .credit-meta { grid-template-columns: 1fr; }
+    .credit-meta div { border-right: 0; border-bottom: 1px solid var(--hairline); }
+    .credit-meta div:last-child { border-bottom: 0; }
+}
+
+@media (max-width: 600px) {
+    .page-hero,
+    .story-section,
+    .hobbies-section,
+    .model-credit-section,
+    .repo-section,
+    .manager-note,
+    .driver-cta { padding-left: 6%; padding-right: 6%; }
+
+    .page-hero h1 { font-size: clamp(3.1rem, 16vw, 5.5rem); }
+    .page-hero-lede, .story-copy p, .model-credit-copy > p, .section-intro, .manager-note > p { font-size: 15px; }
+    .hobby-grid { grid-template-columns: 1fr; }
+    .section-heading-row { align-items: flex-start; flex-direction: column; }
+}
+
+
+.nav a.active {
+    color: #fff;
+}
+
+.nav a.active::after {
+    width: 100%;
 }
