@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pranjal Chaudhary | Garage">
+    <title>Pranjal | Garage</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body data-page="garage">
+    <nav aria-label="Main navigation">
+        <div class="logo">
+            <a href="garage.html" aria-label="Pranjal home">
+                <img src="logo.png" alt="Pranjal logo">
+            </a>
+            <span>Pranjal</span>
+        </div>
+        <div class="nav">
+            <a href="garage.html">Garage</a>
+            <a href="driver.html" id="navDriverLink">Driver</a>
+            <a href="projects.html">Race</a>
+            <a href="mailto:pranjalchaudhary@iitgn.ac.in?subject=Portfolio%20%7C%20Let%27s%20talk">Manager</a>
+        </div>
+    </nav>
+
+    <main>
+        <header id="home" class="hero">
+            <img class="bg-logo" src="logo.png" alt="">
+            <p>PRANJAL CHAUDHARY</p>
+            <h1>BUILD<br>DRIVE<br>REPEAT</h1>
+            <p class="hero-kicker">A mechanical student with a habit of building side quests.</p>
+            <button type="button" id="enterGarageBtn"><span>ENTER GARAGE</span></button>
+        </header>
+
+        <section class="car-showcase" id="showcase" aria-label="3D garage">
+            <div class="showcase-head">
+                <span class="showcase-number">01</span>
+                <div>
+                    <p class="showcase-label">THE GARAGE</p>
+                    <p class="showcase-note">The car is the interface. Drag it, turn it, click around.</p>
+                </div>
+            </div>
+            <div class="car-canvas-wrap" id="carViewer">
+                <canvas id="carCanvas"></canvas>
+                <p class="car-loading" id="carLoading">LOADING TELEMETRY… 0%</p>
+                <p class="car-hint" id="carHint">Drag to rotate · click the car to explore</p>
+            </div>
+            <p class="model-credit">
+                This portfolio uses the 2008 Ferrari F2008 model by Dave Love on Sketchfab, under CC-BY-4.0.
+                <a href="https://sketchfab.com/3d-models/2008-ferrari-f2008-0476bd73b8d84e0e99d5197140bc22d6" target="_blank" rel="noopener">Model source ↗</a>
+            </p>
+        </section>
+    </main>
+
+    <script src="transition.js"></script>
+    <script type="module" src="car-viewer.js"></script>
+</body>
+</html>
